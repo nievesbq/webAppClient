@@ -1,5 +1,6 @@
 package webAppClient.client;
 
+import com.google.gwt.user.client.ui.*;
 import webAppClient.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -9,13 +10,6 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -44,7 +38,7 @@ public class login implements EntryPoint {
         final Button sendButton = new Button(messages.sendButton());
         final TextBox nameField = new TextBox();
         nameField.setText(messages.nameField());
-        final TextBox passField = new TextBox();
+        final PasswordTextBox passField = new PasswordTextBox();
         passField.setText("Enter your password");
         final Label errorLabel = new Label();
 
@@ -116,7 +110,7 @@ public class login implements EntryPoint {
                 errorLabel.setText("");
                 String textToServer = nameField.getText();
                 if (!FieldVerifier.isValidName(textToServer)) {
-                    errorLabel.setText("Please enter at least four characters");
+                    errorLabel.setText("Please enter your user name");
                     return;
                 }
 

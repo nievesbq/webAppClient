@@ -34,9 +34,10 @@ public class FieldVerifier {
    * @return true if valid, false if invalid
    */
   public static boolean isValidName(String name) {
-    if (name == null) {
+    if (name == null || name.equals("")) {
       return false;
     }
-    return name.length() > 3;
+      return true;
+    //return name.length() > 3;
   }
 }
