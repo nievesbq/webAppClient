@@ -1,0 +1,60 @@
+
+html{
+  height: 100%;
+}
+
+body {
+    min-height: 100%;
+	font:30px arial;
+	color: #FFFFFF;
+	text-align:center;
+}
+
+form, p, span {
+	margin:0;
+	padding:10px; }
+
+input { font:20px arial; }
+
+a {
+	color:#CECEF6;
+	text-decoration:none;
+	margin:30px;}
+
+a:hover { text-decoration:underline; }
+
+#wrapper, #loginform {
+    padding:10px;
+	margin:0 auto;
+	background:#120A2A;
+	width:1800px;
+	border:5px solid #ACD8F0; }
+
+#chatbox {
+	text-align:left;
+	margin:0 auto;
+	background:#FFFFFF;
+	height:650px;
+	width:1700px;
+	border:5px solid #ACD8F0;
+	overflow:auto;
+	padding:10px;
+}
+
+#usermsg {
+    margin:20px;
+	width:1600px;
+	border:3px solid #ACD8F0;
+}
+
+#submitmsg {
+    width:90px;
+
+}
+
+.error { color: #ff0000; }
+
+
+.welcome { float:center; }
+
+.logout { float:right; }
