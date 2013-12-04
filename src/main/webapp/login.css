@@ -20,6 +20,32 @@ div {
   text-align: center;
 }
 
+#nameField,#passField {
+border-radius:3px;
+-moz-border-radius:3px; /* Firefox */
+-webkit-border-radius:3px; /* Safari y Chrome */
+
+/* Otros estilos */
+border:1px solid #333;
+background:#eee;
+/*width:100%;*/
+padding:5px;
+}
+
+#mainDiv {
+border-radius:3px;
+-moz-border-radius:3px; /* Firefox */
+-webkit-border-radius:3px; /* Safari y Chrome */
+
+/* Otros estilos */
+border:3px solid #1E79B6;
+background#869997;
+/*width:100%;*/
+/*padding:5px;*/
+}
+
+
+
 /** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {
   width: 400px;

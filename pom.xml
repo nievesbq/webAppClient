@@ -78,7 +78,7 @@
         <!-- Plugin configuration. There are many available options, see 
           gwt-maven-plugin documentation at codehaus.org -->
         <configuration>
-          <runTarget>chatView.html</runTarget>
+          <runTarget>login.html</runTarget>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
           <i18nMessagesBundle>webAppClient.client.Messages</i18nMessagesBundle>
         </configuration>
