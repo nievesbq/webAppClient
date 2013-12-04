@@ -65,6 +65,7 @@ public class login implements EntryPoint {
         RootPanel.get("sendButtonContainer").add(sendButton);
         RootPanel.get("errorLabelContainer").add(errorLabel);
         RootPanel.get("nick").add(nick);
+        RootPanel.get("mainDiv2").setVisible(false);
 
         // Focus the cursor on the name field when the app loads
         //nameField.setFocus(true);
@@ -104,9 +105,14 @@ public class login implements EntryPoint {
              * Fired when the user clicks on the sendButton.
              */
             public void onClick(ClickEvent event) {
-
+                if (!FieldVerifier.isValidName(nameField.getText())) {
+                    errorLabel.setText("Please enter your username");
+                    return;
+                }else{
                 RootPanel.get("mainDiv").setVisible(false);
                 nick.setText("Welcome "+nameField.getText());
+                new createChat().run(RootPanel.get());
+                }
                 //sendNameToServer();
             }
 
