@@ -48,6 +48,7 @@ public class login implements EntryPoint {
         passField.getElement().setAttribute("placeholder","Enter your password");
         final Label errorLabel = new Label();
 
+
         // We can add style names to widgets
         //sendButton.addStyleName("sendButton");
 
@@ -96,7 +97,9 @@ public class login implements EntryPoint {
              * Fired when the user clicks on the sendButton.
              */
             public void onClick(ClickEvent event) {
-                sendNameToServer();
+
+                //RootPanel.get("mainDiv").set
+                //sendNameToServer();
             }
 
             /**
@@ -116,12 +119,14 @@ public class login implements EntryPoint {
                 errorLabel.setText("");
                 String textToServer = nameField.getText();
                 if (!FieldVerifier.isValidName(textToServer)) {
-                    errorLabel.setText("Please enter your user name");
+                    errorLabel.setText("Please enter your username");
                     return;
                 }
+                       //RootLayoutPanel.get().clear();
+                RootLayoutPanel.get().clear();
 
                 // Then, we send the input to the server.
-                sendButton.setEnabled(false);
+/*                sendButton.setEnabled(false);
                 textToServerLabel.setText(textToServer);
                 serverResponseLabel.setText("");
                 greetingService.greetServer(textToServer, new AsyncCallback<String>() {
@@ -141,7 +146,7 @@ public class login implements EntryPoint {
                         dialogBox.center();
                         closeButton.setFocus(true);
                     }
-                });
+                });*/
             }
         }
 

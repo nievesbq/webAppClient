@@ -9,11 +9,40 @@ h1 {
   margin: 40px 0px 70px;
   text-align: center;
 }
+header{
+background-color: rgba(0,0,0,0);
+}
+/*
+html{
+  height: 100%;
+  background:url('res/back.jpg');
+}  */
+
+body {
+   background-image:url('res/back.jpg');
+   background-color:#cccccc;
+}
 /*
 .sendButton {
   display: block;
   font-size: 16pt;
 } */
+ /*
+h1 {
+    position:relative;
+    color:#aeef33;
+    font-family: Georgia;
+}
+
+h1 span{
+    position:absolute;
+    display:block;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:url('res/login.jpg');
+}   */
 
 #sendButton{
  background-image: -webkit-linear-gradient(top, rgba(230,230,230,1) 45%,rgba(155,163,204,1) 100%);
@@ -42,7 +71,7 @@ h1 {
 
 
 div {
-  margin: 15px;
+  margin: 15px 29%;
   text-align: center;
 }
 
