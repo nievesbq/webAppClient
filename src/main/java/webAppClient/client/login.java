@@ -36,17 +36,20 @@ public class login implements EntryPoint {
      */
     public void onModuleLoad() {
         final Button sendButton = new Button(messages.sendButton());
+        sendButton.getElement().setId("sendButton");
+        sendButton.getElement().setClassName("sendButton");
         final TextBox nameField = new TextBox();
         //nameField.setText(messages.nameField());
         nameField.getElement().setId("nameField");
         nameField.getElement().setAttribute("placeholder","Enter your username");
         final PasswordTextBox passField = new PasswordTextBox();
-        passField.setText("Enter your password");
+        //passField.setText("Enter your password");
         passField.getElement().setId("passField");
+        passField.getElement().setAttribute("placeholder","Enter your password");
         final Label errorLabel = new Label();
 
         // We can add style names to widgets
-        sendButton.addStyleName("sendButton");
+        //sendButton.addStyleName("sendButton");
 
         // Add the nameField and sendButton to the RootPanel
         // Use RootPanel.get() to get the entire body element
