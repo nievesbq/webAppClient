@@ -35,18 +35,24 @@ public class login implements EntryPoint {
      * This is the entry point method.
      */
     public void onModuleLoad() {
+
         final Button sendButton = new Button(messages.sendButton());
         sendButton.getElement().setId("sendButton");
         sendButton.getElement().setClassName("sendButton");
+
         final TextBox nameField = new TextBox();
         //nameField.setText(messages.nameField());
         nameField.getElement().setId("nameField");
         nameField.getElement().setAttribute("placeholder","Enter your username");
+
         final PasswordTextBox passField = new PasswordTextBox();
         //passField.setText("Enter your password");
         passField.getElement().setId("passField");
         passField.getElement().setAttribute("placeholder","Enter your password");
+
         final Label errorLabel = new Label();
+        final Label nick = new Label();
+        nick.setText("Log In");
 
 
         // We can add style names to widgets
@@ -58,10 +64,11 @@ public class login implements EntryPoint {
         RootPanel.get("passFieldContainer").add(passField);
         RootPanel.get("sendButtonContainer").add(sendButton);
         RootPanel.get("errorLabelContainer").add(errorLabel);
+        RootPanel.get("nick").add(nick);
 
         // Focus the cursor on the name field when the app loads
-        nameField.setFocus(true);
-        nameField.selectAll();
+        //nameField.setFocus(true);
+        //nameField.selectAll();
 
         // Create the popup dialog box
         final DialogBox dialogBox = new DialogBox();
@@ -98,7 +105,8 @@ public class login implements EntryPoint {
              */
             public void onClick(ClickEvent event) {
 
-                //RootPanel.get("mainDiv").set
+                RootPanel.get("mainDiv").setVisible(false);
+                nick.setText("Welcome "+nameField.getText());
                 //sendNameToServer();
             }
 
