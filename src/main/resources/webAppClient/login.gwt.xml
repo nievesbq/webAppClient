@@ -20,7 +20,7 @@
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='webAppClient.client.login' />
-
+    <inherits name="com.google.web.bindery.autobean.AutoBean" />
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client' />

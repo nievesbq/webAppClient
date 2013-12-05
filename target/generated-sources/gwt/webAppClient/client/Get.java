@@ -1,7 +1,9 @@
 package webAppClient.client;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.http.client.*;
-import com.google.gwt.json.client.JSONObject;
+import com.google.web.bindery.autobean.shared.AutoBean;
+import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ public class Get {
 
     public List<String> getMessages(){
        List<String> messagesList=new ArrayList<String>();
-        String url = "http://www.myserver.com/getData?type=3";
+        String url = "http://172.16.100.125:8080/chat-kata/api/chat/?seq=0";
         RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, URL.encode(url));
 
         try {
@@ -30,8 +32,11 @@ public class Get {
                 public void onResponseReceived(Request request, Response response) {
                     if (200 == response.getStatusCode()) {
                         // Process the response in response.getText()
-                       response.getText();
-                        JSONObject jsonObject=new JSONObject();
+                       String json=response.getText();
+                        MyAutoBeanFactory beanFactory = GWT.create(MyAutoBeanFactory.class);
+                       AutoBean<Item> autoBeanClone = AutoBeanCodex.decode(beanFactory, Item.class, json);
+
+
 
 
                     } else {
