@@ -33,9 +33,7 @@ public class Get {
                     if (200 == response.getStatusCode()) {
                         // Process the response in response.getText()
                        String json=response.getText();
-                        MyAutoBeanFactory beanFactory = GWT.create(MyAutoBeanFactory.class);
-                       AutoBean<Item> autoBeanClone = AutoBeanCodex.decode(beanFactory, Item.class, json);
-
+                        //processGetResponse(json);
 
 
 
@@ -49,5 +47,15 @@ public class Get {
         }
 
        return messagesList;
+    }
+
+    public void processGetResponse(String getResponse) {
+        ServerResponseAutoBeanFactory serverResponseAutoBeanFactory = GWT.create(ServerResponseAutoBeanFactory.class);
+        AutoBean<IServerResponse> autoBean = AutoBeanCodex.decode(serverResponseAutoBeanFactory, IServerResponse.class,
+                getResponse);
+        IServerResponse serverResponse = autoBean.as();
+        //lastSeq = serverResponse.getNextSeq();
+        List<IChatMessage> messages = serverResponse.getMessages();
+        //chatView.addToMessageList(serverResponse.getMessages());
     }
 }

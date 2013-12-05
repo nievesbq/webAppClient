@@ -4,6 +4,7 @@ import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.*;
 
 
@@ -76,12 +77,30 @@ public class createChat {
         sendMessage.addClickHandler(handler);
 
 
+        Timer t = new Timer() {
+            @Override
+            public void run() {
+
+                new Get().getMessages();
+            }
+
+        };
+
+        // Schedule the timer to run once every second.
+        t.schedule(1000);
+        t.run();
+
+
+
+
+
 
 
 
 
 
     }
+
 
 
 
@@ -103,4 +122,7 @@ class MyHandler2 implements ClickHandler {
 
 
     }
+
 }
+
+
