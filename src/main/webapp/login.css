@@ -6,7 +6,7 @@
 h1 {
   font-size: 2em;
   font-weight: bold;
-  color: #777777;
+  color: #ffffff;
   margin: 40px 0px 70px;
   text-align: center;
 }
@@ -45,7 +45,7 @@ h1 span{
     background:url('res/login.jpg');
 }   */
 
-#sendButton{
+#sendButton,#sendMessage{
  background-image: -webkit-linear-gradient(top, rgba(230,230,230,1) 45%,rgba(155,163,204,1) 100%);
    background-image:    -moz-linear-gradient(top, rgba(230,230,230,1) 45%,rgba(155,163,204,1) 100%);
    background-image:     -ms-linear-gradient(top, rgba(230,230,230,1) 45%,rgba(155,163,204,1) 100%);
@@ -75,6 +75,7 @@ h1 span{
   margin: 15px 29%;
   text-align: center;
 }
+
 
 #nameField,#passField {
 border-radius:3px;
@@ -126,12 +127,26 @@ background#869997;
 	margin:0 auto;
 	background:#FFFFFF;
 	height:650px;
-	width:1700px;
+	width:95%;
 	border:5px solid #ACD8F0;
-	overflow:auto;
-	padding:10px;
+	*//*overflow:auto;
+	padding:10px;*/
 	overflow:auto;
 
+}
+#verticalPanel{
+      height:650px;
+      width:95%;
+      margin: 5%;
+}
+#message{
+       height:100%;
+       width:1050px;
+
+}
+
+#nameFieldContainer,#passFieldContainer,#sendButtonContainer,#errorLabelContainer{
+margin: 5px;
 }
 
 

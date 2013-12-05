@@ -6,10 +6,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
 
 import java.util.Set;
 
@@ -32,8 +29,20 @@ public class createChat {
                                          */
         rp.get("mainDiv2").setVisible(true);
         final TextBox message = new TextBox();
+        message.getElement().setAttribute("placeholder","Introduce your message");
+        message.getElement().setAttribute("id","message");
+        final TextBox cb = new TextBox();
+        cb.getElement().setAttribute("id","chatBox");
         final Button sendMessage= new Button();
+        sendMessage.getElement().setAttribute("id", "sendMessage");
+        sendMessage.setText("Send");
         final VerticalPanel vp=new VerticalPanel();
+        vp.getElement().setAttribute("id","verticalPanel");
+        final HorizontalPanel hp=new HorizontalPanel();
+        hp.add(message);
+        hp.add(sendMessage);
+        vp.add(cb);
+        vp.add(hp);
 
         /*final CellList<Item>  cl=new CellList<Item>(new Cell<Item>() {
             public boolean dependsOnSelection() {
@@ -68,9 +77,11 @@ public class createChat {
                 //To change body of implemented methods use File | Settings | File Templates.
             }
         });*/
-        rp.get("chatBox").add(vp);
-        rp.get("message").add(message);
-        rp.get("sendMessage").add(sendMessage);
+
+        rp.get("mainDiv2").add(vp);
+       /* rp.get("mainDiv2").add(message);
+        rp.get("mainDiv2").add(sendMessage);*/
+
 
     }
 
