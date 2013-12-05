@@ -87,8 +87,7 @@ public class createChat {
         };
 
         // Schedule the timer to run once every second.
-        t.schedule(1000);
-        t.run();
+        t.scheduleRepeating(1000);
 
 
 
