@@ -1,8 +1,17 @@
 package webAppClient.client;
 
+import com.google.gwt.cell.client.Cell;
+import com.google.gwt.cell.client.ValueUpdater;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,11 +30,47 @@ public class createChat {
         nameField.getElement().setAttribute("placeholder","Enter your username");
         rp.get("mainDiv2").add(nameField);
                                          */
-        RootPanel.get("mainDiv2").setVisible(true);
+        rp.get("mainDiv2").setVisible(true);
         final TextBox message = new TextBox();
         final Button sendMessage= new Button();
-        RootPanel.get("mainDiv2").add(message);
-        RootPanel.get("mainDiv2").add(sendMessage);
+        final VerticalPanel vp=new VerticalPanel();
+
+        /*final CellList<Item>  cl=new CellList<Item>(new Cell<Item>() {
+            public boolean dependsOnSelection() {
+                return false;  //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            public Set<String> getConsumedEvents() {
+                return null;  //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            public boolean handlesSelection() {
+                return false;  //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            public boolean isEditing(Context context, Element element, Item item) {
+                return false;  //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            public void onBrowserEvent(Context context, Element element, Item item, NativeEvent nativeEvent, ValueUpdater<Item> itemValueUpdater) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            public void render(Context context, Item item, SafeHtmlBuilder safeHtmlBuilder) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            public boolean resetFocus(Context context, Element element, Item item) {
+                return false;  //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            public void setValue(Context context, Element element, Item item) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+        });*/
+        rp.get("chatBox").add(vp);
+        rp.get("message").add(message);
+        rp.get("sendMessage").add(sendMessage);
 
     }
 
