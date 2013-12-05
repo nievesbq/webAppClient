@@ -111,7 +111,7 @@ public class login implements EntryPoint {
                 }else{
                 RootPanel.get("mainDiv").setVisible(false);
                 nick.setText("Welcome "+nameField.getText());
-                new createChat().run(RootPanel.get());
+                new createChat().run(RootPanel.get(),nameField.getText());
                 }
                 //sendNameToServer();
             }

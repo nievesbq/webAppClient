@@ -1,14 +1,14 @@
 package webAppClient.client;
 
-import com.google.gwt.cell.client.Cell;
-import com.google.gwt.cell.client.ValueUpdater;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.ui.*;
 
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,7 +20,8 @@ import java.util.Set;
 public class createChat {
 
 
-    public void run(RootPanel rp){
+    public void run(RootPanel rp, String nick){
+
                             /*
         final TextBox nameField = new TextBox();
         nameField.getElement().setId("nameField");
@@ -31,59 +32,75 @@ public class createChat {
         final TextBox message = new TextBox();
         message.getElement().setAttribute("placeholder","Introduce your message");
         message.getElement().setAttribute("id","message");
-        final TextBox cb = new TextBox();
-        cb.getElement().setAttribute("id","chatBox");
+        final TextCell textCell=new TextCell();
+        final CellList<String> cl=new CellList<String>(textCell);
+        cl.getElement().setAttribute("id","chatBox");
+       // final  CellList<Item> cl=createList(te);
+       // cl.getElement().setId("chatBox");
+       /* final TextBox cb = new TextBox();
+        cb.getElement().setAttribute("id","chatBox");*/
         final Button sendMessage= new Button();
         sendMessage.getElement().setAttribute("id", "sendMessage");
         sendMessage.setText("Send");
         final VerticalPanel vp=new VerticalPanel();
         vp.getElement().setAttribute("id","verticalPanel");
         final HorizontalPanel hp=new HorizontalPanel();
+
+      List<Item> list=new ArrayList<Item>();
+      list.add(new Item("Nombre","Blabalaba"));
+     // cl.setRowCount(list.size(), true);
+      //cl.setRowData(0,list);
+        List<String> listado=new ArrayList<String>();
+        listado.add("pruebas");
+
+        cl.setRowCount(listado.size(),true);
+        cl.setRowData(0,listado);
+
+
+
         hp.add(message);
         hp.add(sendMessage);
-        vp.add(cb);
+        vp.add(cl);
         vp.add(hp);
 
-        /*final CellList<Item>  cl=new CellList<Item>(new Cell<Item>() {
-            public boolean dependsOnSelection() {
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
-            }
 
-            public Set<String> getConsumedEvents() {
-                return null;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            public boolean handlesSelection() {
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            public boolean isEditing(Context context, Element element, Item item) {
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            public void onBrowserEvent(Context context, Element element, Item item, NativeEvent nativeEvent, ValueUpdater<Item> itemValueUpdater) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            public void render(Context context, Item item, SafeHtmlBuilder safeHtmlBuilder) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            public boolean resetFocus(Context context, Element element, Item item) {
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            public void setValue(Context context, Element element, Item item) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-        });*/
 
         rp.get("mainDiv2").add(vp);
        /* rp.get("mainDiv2").add(message);
         rp.get("mainDiv2").add(sendMessage);*/
 
 
+
+
+        MyHandler2 handler = new MyHandler2(message.getText(),nick);
+        sendMessage.addClickHandler(handler);
+
+
+
+
+
+
+
     }
 
 
+
+}
+
+class MyHandler2 implements ClickHandler {
+    private String message;
+    private String nick;
+
+    public MyHandler2(String message,String nick){
+        this.message=message;
+        this.nick=nick;
+    }
+
+    public void onClick(ClickEvent event) {
+
+            new Post().postJson("http://172.16.100.125:8080/chat-kata/api/chat",nick,message);
+
+
+
+    }
 }

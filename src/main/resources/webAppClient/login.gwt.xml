@@ -21,6 +21,7 @@
   <!-- Specify the app entry point class.                         -->
   <entry-point class='webAppClient.client.login' />
 
+
   <!-- Specify the paths for translatable code                    -->
   <source path='client' />
   <source path='shared' />
