@@ -74,6 +74,7 @@ h1 span{
 #mainDiv {
   margin: 15px 29%;
   text-align: center;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 
@@ -127,12 +128,20 @@ background#869997;
 	background:#FFFFFF;
 	height:650px;
 	width:95%;
-	border:5px solid #ACD8F0;
+	/*border:5px solid #ACD8F0;*/
 	*//*overflow:auto;
 	padding:10px;*/
 	overflow:auto;
 
 }
+
+#scroller     {
+      border:5px solid #ACD8F0;
+}
+
+
+
+
 #verticalPanel{
       height:650px;
       width:95%;
@@ -140,12 +149,26 @@ background#869997;
 }
 #message{
        height:100%;
-       width:1050px;
+       width:98%;
+       border:5px solid #000000;
 
+}
+#horizontalPanel{
+      height: 10%;
+      width: 150%;
+      margin-top: 2%;
 }
 
 #nameFieldContainer,#passFieldContainer,#sendButtonContainer,#errorLabelContainer{
 margin: 5px;
 }
 
+.GPBYFDEAB{
+background:#EDF179;
+
+}
+ .GPBYFDECB{
+   background:#BEFFCE;
+
+ }
 

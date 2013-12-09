@@ -78,6 +78,7 @@ public class createChat {
         sendMessage.setText("Send");
 
         vp.getElement().setAttribute("id", "verticalPanel");
+        hp.getElement().setAttribute("id", "horizontalPanel");
 
         panel.getElement().setAttribute("id","scroller");
 
