@@ -1,15 +1,20 @@
 package webAppClient.client;
 
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.cell.client.ValueUpdater;
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.*;
-
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,108 +25,59 @@ import java.util.List;
  */
 public class createChat {
 
+    int count = 0;
+    List<String> chatList = new ArrayList<String>();
+    final TextBox message = new TextBox();
+    final TextCell textCell = new TextCell();
+    final CellList<String> cl = new CellList<String>(textCell);
+    final VerticalPanel vp=new VerticalPanel();
+    final HorizontalPanel hp=new HorizontalPanel();
+    final ScrollPanel panel = new ScrollPanel();
 
-    public void run(RootPanel rp, String nick){
 
-                            /*
-        final TextBox nameField = new TextBox();
-        nameField.getElement().setId("nameField");
-        nameField.getElement().setAttribute("placeholder","Enter your username");
-        rp.get("mainDiv2").add(nameField);
-                                         */
+    public void run(RootPanel rp){
+
+        cl.setPageSize(500);
+
+        final Button sendMessage = new Button("sendMessage", new ClickHandler() {
+
+            public void onClick(ClickEvent event) {
+                if(!message.getText().equals("")){
+                    cl.setRowCount(count++, true);
+                    chatList.add(message.getText());
+                    cl.setRowData(count, chatList);
+
+                    //poner desde el timer
+                    panel.setVerticalScrollPosition(panel.getMaximumVerticalScrollPosition());
+                    message.setText("");
+                }
+            }
+
+        });
+
         rp.get("mainDiv2").setVisible(true);
-        final TextBox message = new TextBox();
         message.getElement().setAttribute("placeholder","Introduce your message");
         message.getElement().setAttribute("id","message");
-        final TextCell textCell=new TextCell();
-        final CellList<String> cl=new CellList<String>(textCell);
+
         cl.getElement().setAttribute("id","chatBox");
-       // final  CellList<Item> cl=createList(te);
-       // cl.getElement().setId("chatBox");
-       /* final TextBox cb = new TextBox();
-        cb.getElement().setAttribute("id","chatBox");*/
-        final Button sendMessage= new Button();
+
+
         sendMessage.getElement().setAttribute("id", "sendMessage");
         sendMessage.setText("Send");
-        final VerticalPanel vp=new VerticalPanel();
-        vp.getElement().setAttribute("id","verticalPanel");
-        final HorizontalPanel hp=new HorizontalPanel();
 
-      List<Item> list=new ArrayList<Item>();
-      list.add(new Item("Nombre","Blabalaba"));
-     // cl.setRowCount(list.size(), true);
-      //cl.setRowData(0,list);
-        List<String> listado=new ArrayList<String>();
-        listado.add("pruebas");
+        vp.getElement().setAttribute("id", "verticalPanel");
 
-        cl.setRowCount(listado.size(),true);
-        cl.setRowData(0,listado);
-
-
+        panel.getElement().setAttribute("id","scroller");
 
         hp.add(message);
         hp.add(sendMessage);
-        vp.add(cl);
+        panel.add(cl);
+        vp.add(panel);
+
+        //vp.add(cl);
         vp.add(hp);
-
-
-
         rp.get("mainDiv2").add(vp);
-       /* rp.get("mainDiv2").add(message);
-        rp.get("mainDiv2").add(sendMessage);*/
-
-
-
-
-        MyHandler2 handler = new MyHandler2(message.getText(),nick);
-        sendMessage.addClickHandler(handler);
-
-
-        Timer t = new Timer() {
-            @Override
-            public void run() {
-
-                new Get().getMessages();
-            }
-
-        };
-
-        // Schedule the timer to run once every second.
-        t.scheduleRepeating(1000);
-
-
-
-
-
-
-
-
 
 
     }
-
-
-
-
 }
-
-class MyHandler2 implements ClickHandler {
-    private String message;
-    private String nick;
-
-    public MyHandler2(String message,String nick){
-        this.message=message;
-        this.nick=nick;
-    }
-
-    public void onClick(ClickEvent event) {
-
-            new Post().postJson("http://172.16.100.125:8080/chat-kata/api/chat",nick,message);
-
-
-
-    }
-
-}
-
-

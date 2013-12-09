@@ -111,7 +111,7 @@ public class login implements EntryPoint {
                 }else{
                 RootPanel.get("mainDiv").setVisible(false);
                 nick.setText("Welcome "+nameField.getText());
-                new createChat().run(RootPanel.get(),nameField.getText());
+                new createChat().run(RootPanel.get());
                 }
                 //sendNameToServer();
             }
@@ -139,28 +139,6 @@ public class login implements EntryPoint {
                        //RootLayoutPanel.get().clear();
                 RootLayoutPanel.get().clear();
 
-                // Then, we send the input to the server.
-/*                sendButton.setEnabled(false);
-                textToServerLabel.setText(textToServer);
-                serverResponseLabel.setText("");
-                greetingService.greetServer(textToServer, new AsyncCallback<String>() {
-                    public void onFailure(Throwable caught) {
-                        // Show the RPC error message to the user
-                        dialogBox.setText("Remote Procedure Call - Failure");
-                        serverResponseLabel.addStyleName("serverResponseLabelError");
-                        serverResponseLabel.setHTML(SERVER_ERROR);
-                        dialogBox.center();
-                        closeButton.setFocus(true);
-                    }
-
-                    public void onSuccess(String result) {
-                        dialogBox.setText("Remote Procedure Call");
-                        serverResponseLabel.removeStyleName("serverResponseLabelError");
-                        serverResponseLabel.setHTML(result);
-                        dialogBox.center();
-                        closeButton.setFocus(true);
-                    }
-                });*/
             }
         }
 
