@@ -1,5 +1,7 @@
 package webAppClient.client;
 
+import com.google.web.bindery.autobean.shared.AutoBean;
+
 /**
  * Created with IntelliJ IDEA.
  * User: montero
@@ -8,4 +10,14 @@ package webAppClient.client;
  * To change this template use File | Settings | File Templates.
  */
 public interface IChatMessage {
+    @AutoBean.PropertyName(value="message")
+    String getMessage();
+    @AutoBean.PropertyName(value="message")
+    void setMessage(String message);
+
+    @AutoBean.PropertyName(value="nick")
+    String getNick();
+    @AutoBean.PropertyName(value="nick")
+    void setNick(String nick);
+
 }

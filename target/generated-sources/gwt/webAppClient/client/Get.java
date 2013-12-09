@@ -2,6 +2,8 @@ package webAppClient.client;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.http.client.*;
+import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONValue;
 import com.google.web.bindery.autobean.shared.AutoBean;
 import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 
@@ -18,10 +20,12 @@ import java.util.List;
 public class Get {
 
 
+
     public List<String> getMessages(){
        List<String> messagesList=new ArrayList<String>();
         String url = "http://172.16.100.125:8080/chat-kata/api/chat/?seq=0";
         RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, URL.encode(url));
+
 
         try {
             Request request = builder.sendRequest(null, new RequestCallback() {
@@ -33,8 +37,9 @@ public class Get {
                     if (200 == response.getStatusCode()) {
                         // Process the response in response.getText()
                        String json=response.getText();
-                        //processGetResponse(json);
-
+                        IResponse serverResponse = decodeJSON(response.getText());
+                        processResponse(serverResponse);
+                       //processGetResponse(json);
 
 
                     } else {
@@ -49,13 +54,37 @@ public class Get {
        return messagesList;
     }
 
-    public void processGetResponse(String getResponse) {
+    private void processResponse(IResponse serverResponse) {
+
+         List<IChatMessage>chatMessageList=serverResponse.getMessages();
+         int seqNumber=serverResponse.getNextSeq();
+        for(IChatMessage message : chatMessageList){
+            new ChatMessage(message.getNick(), message.getMessage());
+        }
+
+
+        /*ChatState chatState = ChatState.getChatState();
+        chatState.setNextSeq(serverResponse.getNextSeq());
+
+        List<IChatMessage> messages = serverResponse.getMessages();
+        for(IChatMessage message : messages){
+            ChatState.getChatState().getMessages().add(new ChatMessage(message.getNick(), message.getMessage()));
+        }*/
+    }
+
+    private IResponse decodeJSON(String json) {
+        IResponseFactory factory = GWT.create(IResponseFactory.class);
+        AutoBean<IResponse> bean = AutoBeanCodex.decode(factory, IResponse.class, json);
+        return bean.as();
+    }
+
+   /* public void processGetResponse(String getResponse) {
         ServerResponseAutoBeanFactory serverResponseAutoBeanFactory = GWT.create(ServerResponseAutoBeanFactory.class);
         AutoBean<IServerResponse> autoBean = AutoBeanCodex.decode(serverResponseAutoBeanFactory, IServerResponse.class,
                 getResponse);
         IServerResponse serverResponse = autoBean.as();
         //lastSeq = serverResponse.getNextSeq();
-        List<IChatMessage> messages = serverResponse.getMessages();
+        List<Item> messages = serverResponse.getMessages();
         //chatView.addToMessageList(serverResponse.getMessages());
-    }
+    }*/
 }

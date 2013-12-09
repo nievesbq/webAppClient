@@ -34,7 +34,7 @@ public class Post {
 
                 public void onResponseReceived(Request request, Response response) {
                     if(response.getStatusCode()!=200){
-                        Window.alert("Error in the message format");
+                        Window.alert("Error in the message format"+response.getStatusCode());
                     }
                 }
             });

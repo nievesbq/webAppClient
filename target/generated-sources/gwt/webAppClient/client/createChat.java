@@ -1,20 +1,16 @@
 package webAppClient.client;
 
-import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.cell.client.ValueUpdater;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.NativeEvent;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.cellview.client.CellList;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,21 +31,27 @@ public class createChat {
     final ScrollPanel panel = new ScrollPanel();
 
 
-    public void run(RootPanel rp){
+    public void run(RootPanel rp, final String nick){
+
 
         cl.setPageSize(500);
 
         final Button sendMessage = new Button("sendMessage", new ClickHandler() {
 
             public void onClick(ClickEvent event) {
+
+
+
+
                 if(!message.getText().equals("")){
-                    cl.setRowCount(count++, true);
+                   /* cl.setRowCount(count++, true);
                     chatList.add(message.getText());
                     cl.setRowData(count, chatList);
 
-                    //poner desde el timer
-                    panel.setVerticalScrollPosition(panel.getMaximumVerticalScrollPosition());
+                    panel.setVerticalScrollPosition(panel.getMaximumVerticalScrollPosition() - 1);*/
+                    new Post().postJson("http://172.16.100.125:8080/chat-kata/api/chat",nick.toString(),message.getText());
                     message.setText("");
+
                 }
             }
 
@@ -79,5 +81,20 @@ public class createChat {
         rp.get("mainDiv2").add(vp);
 
 
+        Timer t = new Timer() {
+            @Override
+            public void run() {
+
+                new Get().getMessages();
+            }
+
+        };
+
+        // Schedule the timer to run once every second.
+        t.scheduleRepeating(1000);
+
+
+
     }
+
 }

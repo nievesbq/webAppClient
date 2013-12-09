@@ -12,6 +12,6 @@ import java.util.List;
 public interface IServerResponse {
     public int getNextSeq();
     public void setNextSeq(int nextSeq);
-    public List<IChatMessage> getMessages();
-    public void setMessages(List<IChatMessage> messages);
+    public List<Item> getMessages();
+    public void setMessages(List<Item> messages);
 }
