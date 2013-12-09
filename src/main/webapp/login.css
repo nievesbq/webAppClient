@@ -122,7 +122,7 @@ background#869997;
 }
 
 
- #scroller {
+ #scroller,#chatBox {
 	text-align:left;
 	background:#FFFFFF;
 	height:650px;

@@ -2,14 +2,19 @@ package webAppClient.client;
 
 import com.google.gwt.cell.client.TextCell;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.http.client.*;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.*;
+import com.google.web.bindery.autobean.shared.AutoBean;
+import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.google.gwt.user.client.Cookies;
 
 
 /**
@@ -31,7 +36,12 @@ public class createChat {
     final ScrollPanel panel = new ScrollPanel();
 
 
+
     public void run(final RootPanel rp, final String nick){
+
+        final int  seqNumber;
+        if(Cookies.getCookie(nick)==null)
+            Cookies.setCookie(nick, ""+0);
 
 
         cl.setPageSize(500);
@@ -85,14 +95,16 @@ public class createChat {
             @Override
             public void run() {
 
-                 new Get(rp,chatList).getMessages();
+                 //new Get(rp,chatList).getMessages();
+                getMessages(nick);
 
-                if(chatList!=null){
-                cl.setRowCount(chatList.size(), true);
-                cl.setRowData(0, chatList);
-                }
-
+                if(chatList!=null && Integer.parseInt(Cookies.getCookie(nick))<chatList.size()){
+                cl.setRowCount(chatList.size()+1, true);
+                cl.setRowData(Integer.parseInt(Cookies.getCookie(nick)), chatList.subList(Integer.parseInt(Cookies.getCookie(nick)),chatList.size()));
                 panel.setVerticalScrollPosition(panel.getMaximumVerticalScrollPosition() - 1);
+                    Cookies.setCookie(nick, ""+chatList.size());
+
+                }
             }
 
         };
@@ -103,5 +115,55 @@ public class createChat {
 
 
     }
+    public void getMessages(final String nick){
+
+        String url = "http://172.16.100.125:8080/chat-kata/api/chat/?seq=0";
+        RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, URL.encode(url));
+
+
+        try {
+            Request request = builder.sendRequest(null, new RequestCallback() {
+                public void onError(Request request, Throwable exception) {
+                    // Couldn't connect to server (could be timeout, SOP violation, etc.)
+                }
+
+                public void onResponseReceived(Request request, Response response) {
+                    if (200 == response.getStatusCode()) {
+                        // Process the response in response.getText()
+                        String json=response.getText();
+                        IResponse serverResponse = decodeJSON(response.getText());
+                        processResponse(serverResponse,nick);
+
+                        //processGetResponse(json);
+
+
+                    } else {
+                        // Handle the error.  Can get the status text from response.getStatusText()
+                    }
+                }
+            });
+        } catch (RequestException e) {
+            // Couldn't connect to server
+        }
+
+    }
+    private List<String> processResponse(IResponse serverResponse, String nick) {
+        List<String> listado=new ArrayList<String>();
+        List<IChatMessage>chatMessageList=serverResponse.getMessages();
+        serverResponse.getNextSeq();
+        for(IChatMessage message : chatMessageList){
+            listado.add(message.getNick()+": " +message.getMessage());
+        }
+        chatList=listado;
+        return listado;
+
+}
+
+    private IResponse decodeJSON(String json) {
+        IResponseFactory factory = GWT.create(IResponseFactory.class);
+        AutoBean<IResponse> bean = AutoBeanCodex.decode(factory, IResponse.class, json);
+        return bean.as();
+    }
+
 
 }
