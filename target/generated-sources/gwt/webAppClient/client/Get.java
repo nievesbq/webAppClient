@@ -2,8 +2,7 @@ package webAppClient.client;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.http.client.*;
-import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.json.client.JSONValue;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.web.bindery.autobean.shared.AutoBean;
 import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 
@@ -18,11 +17,16 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Get {
+    final RootPanel rp;
+    List<String> messagesList;
 
+    public Get(RootPanel rp,List<String> messagesList) {
+        this.rp=rp;
+        this.messagesList=messagesList;
+    }
 
+    public void getMessages(){
 
-    public List<String> getMessages(){
-       List<String> messagesList=new ArrayList<String>();
         String url = "http://172.16.100.125:8080/chat-kata/api/chat/?seq=0";
         RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, URL.encode(url));
 
@@ -38,7 +42,8 @@ public class Get {
                         // Process the response in response.getText()
                        String json=response.getText();
                         IResponse serverResponse = decodeJSON(response.getText());
-                        processResponse(serverResponse);
+                        messagesList=processResponse(serverResponse);
+
                        //processGetResponse(json);
 
 
@@ -51,15 +56,14 @@ public class Get {
             // Couldn't connect to server
         }
 
-       return messagesList;
     }
 
-    private void processResponse(IResponse serverResponse) {
-
+    private List<String> processResponse(IResponse serverResponse) {
+               List<String> listado=new ArrayList<String>();
          List<IChatMessage>chatMessageList=serverResponse.getMessages();
          int seqNumber=serverResponse.getNextSeq();
         for(IChatMessage message : chatMessageList){
-            new ChatMessage(message.getNick(), message.getMessage());
+            listado.add(message.getNick()+": " +message.getMessage());
         }
 
 
@@ -70,6 +74,7 @@ public class Get {
         for(IChatMessage message : messages){
             ChatState.getChatState().getMessages().add(new ChatMessage(message.getNick(), message.getMessage()));
         }*/
+        return listado;
     }
 
     private IResponse decodeJSON(String json) {
@@ -87,4 +92,7 @@ public class Get {
         List<Item> messages = serverResponse.getMessages();
         //chatView.addToMessageList(serverResponse.getMessages());
     }*/
+
+
+
 }

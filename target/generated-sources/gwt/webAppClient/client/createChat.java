@@ -31,7 +31,7 @@ public class createChat {
     final ScrollPanel panel = new ScrollPanel();
 
 
-    public void run(RootPanel rp, final String nick){
+    public void run(final RootPanel rp, final String nick){
 
 
         cl.setPageSize(500);
@@ -85,7 +85,14 @@ public class createChat {
             @Override
             public void run() {
 
-                new Get().getMessages();
+                 new Get(rp,chatList).getMessages();
+
+                if(chatList!=null){
+                cl.setRowCount(chatList.size(), true);
+                cl.setRowData(0, chatList);
+                }
+
+                panel.setVerticalScrollPosition(panel.getMaximumVerticalScrollPosition() - 1);
             }
 
         };
