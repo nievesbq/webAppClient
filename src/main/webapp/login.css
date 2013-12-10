@@ -77,6 +77,10 @@ h1 span{
   background: rgba(0, 0, 0, 0.5);
 }
 
+#mainDiv2 {
+font-style: italic;
+font-weight: bold;
+}
 
 #nameField,#passField {
 border-radius:3px;
@@ -165,10 +169,15 @@ margin: 5px;
 
 .GPBYFDEAB{
 background:#EDF179;
+padding: 5px
 
 }
  .GPBYFDECB{
    background:#BEFFCE;
+   padding: 5px
 
+ }
+ #chatBox {
+ width: 100%;
  }
 

@@ -1,4 +1,4 @@
-package webAppClient.client;
+package webAppClient.client.interfaces;
 
 import com.google.web.bindery.autobean.shared.AutoBean;
 
@@ -12,13 +12,15 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface IResponse {
-    @AutoBean.PropertyName(value="messages")
+    @AutoBean.PropertyName(value = "messages")
     List<IChatMessage> getMessages();
-    @AutoBean.PropertyName(value="nextSeq")
+
+    @AutoBean.PropertyName(value = "nextSeq")
     int getNextSeq();
 
-    @AutoBean.PropertyName(value="messages")
+    @AutoBean.PropertyName(value = "messages")
     void setMessages(List<IChatMessage> messages);
-    @AutoBean.PropertyName(value="nextSeq")
+
+    @AutoBean.PropertyName(value = "nextSeq")
     void setNextSeq(int nextSeq);
 }

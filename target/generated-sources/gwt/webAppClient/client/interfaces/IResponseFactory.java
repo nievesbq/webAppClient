@@ -1,7 +1,8 @@
-package webAppClient.client;
+package webAppClient.client.interfaces;
 
 import com.google.web.bindery.autobean.shared.AutoBean;
 import com.google.web.bindery.autobean.shared.AutoBeanFactory;
+import webAppClient.client.ChatMessage;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,6 +13,7 @@ import com.google.web.bindery.autobean.shared.AutoBeanFactory;
  */
 public interface IResponseFactory extends AutoBeanFactory {
     AutoBean<IResponse> response();
+
     AutoBean<IChatMessage> message(ChatMessage message);
 
 }

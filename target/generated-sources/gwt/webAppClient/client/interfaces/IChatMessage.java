@@ -1,4 +1,4 @@
-package webAppClient.client;
+package webAppClient.client.interfaces;
 
 import com.google.web.bindery.autobean.shared.AutoBean;
 
@@ -10,14 +10,16 @@ import com.google.web.bindery.autobean.shared.AutoBean;
  * To change this template use File | Settings | File Templates.
  */
 public interface IChatMessage {
-    @AutoBean.PropertyName(value="message")
+    @AutoBean.PropertyName(value = "message")
     String getMessage();
-    @AutoBean.PropertyName(value="message")
+
+    @AutoBean.PropertyName(value = "message")
     void setMessage(String message);
 
-    @AutoBean.PropertyName(value="nick")
+    @AutoBean.PropertyName(value = "nick")
     String getNick();
-    @AutoBean.PropertyName(value="nick")
+
+    @AutoBean.PropertyName(value = "nick")
     void setNick(String nick);
 
 }

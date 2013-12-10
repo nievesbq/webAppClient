@@ -1,12 +1,7 @@
 package webAppClient.client;
 
-/**
- * Created with IntelliJ IDEA.
- * User: montero
- * Date: 9/12/13
- * Time: 11:58
- * To change this template use File | Settings | File Templates.
- */
+import webAppClient.client.interfaces.IChatMessage;
+
 public class ChatMessage implements IChatMessage {
     private String message;
     private String nick;
